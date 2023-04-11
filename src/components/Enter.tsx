@@ -1,31 +1,63 @@
 import React, { useState } from "react";
-const { ipcRenderer } = window.require("electron");
+import { useNavigate } from "react-router-dom";
 
 export default function Enter() {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+  const [inputValue, setInputValue] = useState<string>("");
+  const navigate = useNavigate();
 
-  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
   };
 
-  const handleQuerySubmit = () => {
-    ipcRenderer.send("query", query);
-
-    ipcRenderer.on("query-results", (event, results) => {
-      setResults(results);
-    });
+  const submit = () => {
+    // if (inputValue === "admin") {
+    navigate("/dashboard");
+    // }
   };
 
   return (
-    <div>
-      <input type="text" value={query} onChange={handleQueryChange} />
-      <button onClick={handleQuerySubmit}>Submit</button>
-      <ul>
-        {results.map((result: any, index: number) => (
-          <li key={index}>{result.first_name}</li>
-        ))}
-      </ul>
+    <div className="enter-container p-5">
+      <div className="enter-inner border border-rounded border-1">
+        <div className="bg-dark p-4 text-white text-center rounded-top">
+          <h4>Zoo management system</h4>
+          <p>Sign in as an admin or select your role and continue</p>
+        </div>
+        <div className="bg-light p-4 rounded-bottom form-group">
+          <div className="form-group">
+            <label htmlFor="password" className="mb-2">
+              Enter password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={inputValue}
+              onChange={handleInputChange}
+            />
+          </div>
+          <hr />
+          <div className="form-group">
+            <label htmlFor="select" className="mb-2">
+              Select your role
+            </label>
+            <select className="form-control" id="select">
+              <option>Select</option>
+              <option>Caretaker</option>
+              <option>Janitor</option>
+              <option>Guide</option>
+              <option>Receptionist</option>
+              <option>Event manager</option>
+            </select>
+          </div>
+          <button
+            className="btn btn-primary w-100 mt-3"
+            type="submit"
+            onClick={submit}
+          >
+            Enter
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

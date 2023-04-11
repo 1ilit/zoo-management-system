@@ -62,6 +62,7 @@ app.whenReady().then(() => {
   createWindow();
 
   ipcMain.on('query', (event: IpcMainEvent, query: string) => {
+    const querySplit = query.split('#');
     const connection = mysql.createConnection({
       host: process.env.MYSQL_HOST,
       user: process.env.MYSQL_USER,
@@ -71,10 +72,10 @@ app.whenReady().then(() => {
 
     connection.connect();
 
-    connection.query(query, function(error, results, fields) {
+    connection.query(querySplit[1], function (error, results, fields) {
       if (error) throw error;
-      console.log('Connected to the database.');
-      event.sender.send('query-results', results);
+      console.log(`Connected to the database from channel ${querySplit[0]}`);
+      event.sender.send(`query-${querySplit[0]}`, results);
     });
 
     connection.end();

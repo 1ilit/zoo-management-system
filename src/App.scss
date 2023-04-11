@@ -1,6 +1,22 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: start;
+}
+
+.h-100vh{
+  height: 100vh;
+}
+
+.w-f200{
+  width: 400px;
+}
+
+.enter-container{
+  display: flex;
+  align-items: center;
+  height: 100%; 
+}
+
+.enter-inner{
+  margin: auto;
 }
