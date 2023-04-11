@@ -37,12 +37,6 @@ export default function Sidebar() {
           Tickets
         </Link>
       </p>
-      <p className="px-3 py-2">
-        <Link to="/" className="fw-bold">
-          <i className="fa-solid fa-arrow-left me-1"></i>
-          Entry page
-        </Link>
-      </p>
     </div>
   );
 }
