@@ -18,7 +18,7 @@ export default function Enter() {
   return (
     <div className="enter-container p-5">
       <div className="enter-inner border border-rounded border-1">
-        <div className="bg-dark p-4 text-white text-center rounded-top">
+        <div className="bg-success p-4 text-white text-center rounded-top">
           <h4>Zoo management system</h4>
           <p>Sign in as an admin or select your role and continue</p>
         </div>
@@ -50,7 +50,7 @@ export default function Enter() {
             </select>
           </div>
           <button
-            className="btn btn-primary w-100 mt-3"
+            className="btn btn-success w-100 mt-3"
             type="submit"
             onClick={submit}
           >

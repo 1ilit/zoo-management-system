@@ -68,7 +68,7 @@ export default function Animals() {
                     <td>{s.date_of_birth.toString()}</td>
                     <td>{s.habitat}</td>
                     <td>
-                      <Link to={`/animal/edit/${s.aid}`} className="ms-2">
+                      <Link to={`/animal/edit/${s.aid}`}>
                         Edit
                       </Link>
                     </td>

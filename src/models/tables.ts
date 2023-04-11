@@ -51,3 +51,18 @@ export interface TicketData {
     guide_first_name: string;
     guide_last_name: string;
 }
+
+export interface Event {
+    name: string;
+    date: string;
+    location: string;
+    event_manager_ssn: string;
+}
+
+export interface EventData {
+    event_name: string;
+    event_date: string;
+    location: string;
+    event_mgr_first_name: string;
+    event_mgr_last_name: string;
+}

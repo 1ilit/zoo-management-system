@@ -93,7 +93,7 @@ export default function EditStaffMember() {
               <button onClick={() => navigate(-1)}>
                 <i className="fa-solid fa-arrow-left me-1"></i>
               </button>
-              <h3 className="ms-2">{`Staff / ${staffMember?.first_name} ${staffMember?.last_name} / Edit`}</h3>
+              <h3 className="ms-2">{`Staff / Edit / ${staffMember?.first_name} ${staffMember?.last_name}`}</h3>
             </div>
             <hr />
             <form onSubmit={handleSubmit}>

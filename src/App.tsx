@@ -15,6 +15,7 @@ import AddAnimal from "./components/animal/AddAnimal";
 import AddHabitat from "./components/habitats/AddHabitat";
 import AddTicket from "./components/ticket/AddTicket";
 import TicketInfo from "./components/ticket/TicketInfo";
+import AddEvent from "./components/events/AddEvent";
 
 console.log(
   "[App.tsx]",
@@ -40,6 +41,7 @@ function App() {
         <Route path="/habitat/add" element={<AddHabitat />} />
         <Route path="/ticket/add" element={<AddTicket />} />
         <Route path="/ticket/:id" element={<TicketInfo />} />
+        <Route path="/event/add" element={<AddEvent />} />
       </Routes>
     </Router>
   );
