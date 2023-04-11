@@ -15,6 +15,7 @@ import AddHabitat from "./components/habitats/AddHabitat";
 import AddTicket from "./components/ticket/AddTicket";
 import TicketInfo from "./components/ticket/TicketInfo";
 import AddEvent from "./components/events/AddEvent";
+import StaffSearchResult from "./components/staff_member/StaffSearchReult";
 
 console.log(
   "[App.tsx]",
@@ -33,6 +34,7 @@ function App() {
         <Route path="/staff/:id" element={<StaffInfo />} />
         <Route path="/staff/edit/:id" element={<EditStaffMember />} />
         <Route path="/staff/add" element={<AddStaffMember />} />
+        <Route path="/staff/search/:q" element={<StaffSearchResult />} />
         <Route path="/events" element={<Events />} />
         <Route path="/event/add" element={<AddEvent />} />
         <Route path="/habitats" element={<Habitats />} />

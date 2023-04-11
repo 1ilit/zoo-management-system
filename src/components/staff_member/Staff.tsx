@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar";
 const { ipcRenderer } = window.require("electron");
 import { StaffMember } from "@/models/tables";
 
 export default function Staff() {
   const [staff, setStaff] = useState<StaffMember[]>([]);
+  const [searchString, setSearchString] = useState<string>("");
+  const searchDisabled = searchString === "";
+  const navigate = useNavigate();
+
   const selectAll = "staff#select * from staff_member;";
   const deleteBy = (table: string, field: string, value: string) => {
     return `delete from ${table} where ${table}.${field}='${value}';`;
@@ -49,6 +53,23 @@ export default function Staff() {
               <Link to="/staff/add">Add a staff member</Link>
             </div>
             <hr />
+            <nav className="my-3">
+              <div className="d-flex justify-content-between align-items-baseline">
+                <input
+                  type="text"
+                  className="form-control w-100 me-2"
+                  placeholder="Search by last name"
+                  onChange={(e) => setSearchString(e.target.value)}
+                />
+                <button
+                  className="btn btn-primary"
+                  disabled={searchDisabled}
+                  onClick={(e) => navigate(`/staff/search/${searchString}`)}
+                >
+                  Search
+                </button>
+              </div>
+            </nav>
             <table className="table table-bordered">
               <thead className="text-center">
                 <tr>

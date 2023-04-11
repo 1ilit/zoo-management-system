@@ -138,7 +138,7 @@ export default function AddStaffMember() {
                   className="form-control"
                   id="email"
                   name="email"
-                  placeholder="email"
+                  placeholder="Email"
                   onChange={handleInputChange}
                 />
               </div>
