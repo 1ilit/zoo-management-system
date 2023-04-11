@@ -7,11 +7,12 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Animals from "./components/animal/Animals";
 import Events from "./components/events/Events";
 import Tickets from "./components/Tickets";
-import Habitats from "./components/Habitats";
+import Habitats from "./components/habitats/Habitats";
 import EditStaffMember from "./components/staff_member/EditStaffMember";
 import AddStaffMember from "./components/staff_member/AddStaffMember";
 import EditAnimal from "./components/animal/EditAnimal";
 import AddAnimal from "./components/animal/AddAnimal";
+import AddHabitat from "./components/habitats/AddHabitat";
 
 console.log(
   "[App.tsx]",
@@ -34,6 +35,7 @@ function App() {
         <Route path="/staff/add" element={<AddStaffMember />} />
         <Route path="/animal/edit/:id" element={<EditAnimal />} />
         <Route path="/animal/add" element={<AddAnimal />} />
+        <Route path="/habitat/add" element={<AddHabitat />} />
       </Routes>
     </Router>
   );

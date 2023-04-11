@@ -22,3 +22,12 @@ export interface Animal {
     weight: number;
     habitat: string;
 }
+
+export interface Habitat{
+    hid: string;
+    name: string;
+    capacity: number;
+    type: string;
+    size: number;
+    description: string;
+}

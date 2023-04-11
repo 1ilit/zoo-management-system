@@ -2,30 +2,31 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../Sidebar";
 const { ipcRenderer } = window.require("electron");
-import { Animal } from "@/models/tables";
+import { Habitat } from "@/models/tables";
 
-export default function Animals() {
-  const [animals, setAnimals] = useState<Animal[]>([]);
-  const selectAllQuery = "animal#select * from animal;";
+export default function Habitats() {
+  const [habitats, setHabitats] = useState<Habitat[]>([]);
+  const selectAllQuery = "habitat#select * from habitat;";
+
   const deleteBy = (table: string, field: string, value: string) => {
     return `delete from ${table} where ${table}.${field}='${value}';`;
   };
 
   const handleSelect = () => {
     ipcRenderer.send("query", selectAllQuery);
-    ipcRenderer.on("query-animal", (event, results) => {
-      setAnimals(results);
+    ipcRenderer.on("query-habitat", (event, results) => {
+      setHabitats(results);
       return () => {
-        ipcRenderer.removeAllListeners("query-animal");
+        ipcRenderer.removeAllListeners("query-habitat");
       };
     });
   };
 
   const handleDelete = (id: string) => {
-    ipcRenderer.send("query", `animal-delete#${deleteBy("animal", "aid", id)}`);
-    ipcRenderer.on("query-animal-delete", (event, results) => {
+    ipcRenderer.send("query", `habitat-delete#${deleteBy("habitat", "hid", id)}`);
+    ipcRenderer.on("query-habitat-delete", (event, results) => {
       return () => {
-        ipcRenderer.removeAllListeners("query-animal-delete");
+        ipcRenderer.removeAllListeners("query-habitat-delete");
       };
     });
     handleSelect();
@@ -42,38 +43,33 @@ export default function Animals() {
         <div className="col-md-9 m-0 p-0">
           <div className="container p-5">
             <div className="d-flex justify-content-between align-items-baseline">
-              <h3>Animals</h3>
-              <Link to="/animal/add">Add an animal</Link>
+              <h3>Habitats</h3>
+              <Link to="/habitat/add">Add a habitat</Link>
             </div>
             <hr />
             <table className="table table-bordered">
               <thead className="text-center">
                 <tr>
-                  <th>aId</th>
+                  <th>hId</th>
                   <th>Name</th>
-                  <th>Specie</th>
-                  <th>Weight</th>
-                  <th>Date of Birth</th>
-                  <th>Habitat</th>
-                  <th colSpan={2}>Manage</th>
+                  <th>Capacity</th>
+                  <th>Type</th>
+                  <th>Size</th>
+                  <th>Description</th>
+                  <th colSpan={1}>Manage</th>
                 </tr>
               </thead>
               <tbody>
-                {animals.map((s: Animal, index: number) => (
+                {habitats.map((s: Habitat, index: number) => (
                   <tr className="table-bordered align-middle" key={index}>
-                    <td scope="row">{s.aid}</td>
+                    <td scope="row">{s.hid}</td>
                     <td>{s.name}</td>
-                    <td>{s.specie}</td>
-                    <td>{s.weight}</td>
-                    <td>{s.date_of_birth.toString()}</td>
-                    <td>{s.habitat}</td>
+                    <td>{s.capacity}</td>
+                    <td>{s.type}</td>
+                    <td>{s.size}</td>
+                    <td>{s.description}</td>
                     <td>
-                      <Link to={`/animal/edit/${s.aid}`} className="ms-2">
-                        Edit
-                      </Link>
-                    </td>
-                    <td>
-                      <button onClick={() => handleDelete(s.aid)}>
+                      <button onClick={() => handleDelete(s.hid)}>
                         <i className="fa-solid fa-trash"></i>
                       </button>
                     </td>

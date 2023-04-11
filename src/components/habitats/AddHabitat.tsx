@@ -2,28 +2,28 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import { ipcRenderer } from "electron";
-import { Animal } from "@/models/tables";
+import { Habitat } from "@/models/tables";
 
-export default function AddAnimal() {
-  const [formState, setFormState] = useState<Animal>({
-    aid: "",
-    date_of_birth: "",
+export default function AddHabitat() {
+  const [formState, setFormState] = useState<Habitat>({
+    hid: "",
     name: "",
-    weight: 0,
-    specie: "",
-    habitat: "",
+    type: "",
+    capacity: 0,
+    description: "",
+    size: 0,
   });
 
   const navigate = useNavigate();
 
-  const addQuery = `add-animal#insert into animal (aid, name, specie, date_of_birth, weight, habitat)
-  VALUES ('${formState.aid}', '${formState.name}', '${formState.specie}', '${formState.date_of_birth}', ${formState.weight}, '${formState.habitat}');`;
+  const addQuery = `add-habitat#insert into habitat (hid, name, type, capacity, description, size)
+  values ('${formState.hid}', '${formState.name}', '${formState.type}', ${formState.capacity}, '${formState.description}', ${formState.size});`;
 
   const handleInsert = () => {
     ipcRenderer.send("query", addQuery);
-    ipcRenderer.on("query-add-animal", (event, results) => {
+    ipcRenderer.on("query-add-habitat", (event, results) => {
       return () => {
-        ipcRenderer.removeAllListeners("query-add-animal");
+        ipcRenderer.removeAllListeners("query-add-habitat");
       };
     });
   };
@@ -55,20 +55,20 @@ export default function AddAnimal() {
               <button onClick={() => navigate(-1)}>
                 <i className="fa-solid fa-arrow-left me-1"></i>
               </button>
-              <h3 className="ms-2">{`Animals / Add`}</h3>
+              <h3 className="ms-2">Habitats / Add</h3>
             </div>
             <hr />
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="aid" className="my-2 fw-bold">
-                  aId :{" "}
+                <label htmlFor="hid" className="my-2 fw-bold">
+                  hId :{" "}
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="aid"
-                  name="aid"
-                  placeholder="aId"
+                  id="hid"
+                  name="hid"
+                  placeholder="hId"
                   onChange={handleInputChange}
                 />
               </div>
@@ -86,54 +86,54 @@ export default function AddAnimal() {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="dob" className="my-2 fw-bold">
-                  Date of birth :{" "}
+                <label htmlFor="type" className="my-2 fw-bold">
+                  Type :{" "}
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="dob"
-                  name="date_of_birth"
-                  placeholder="Date of birth"
+                  id="type"
+                  name="type"
+                  placeholder="Type"
                   onChange={handleInputChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="specie" className="my-2 fw-bold">
-                  Specie :{" "}
+                <label htmlFor="capacity" className="my-2 fw-bold">
+                  Capacity :{" "}
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="specie"
-                  name="specie"
-                  placeholder="Specie"
+                  id="capacity"
+                  name="capacity"
+                  placeholder="Capacity"
                   onChange={handleInputChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="weight" className="my-2 fw-bold">
-                  Weight :{" "}
+                <label htmlFor="size" className="my-2 fw-bold">
+                  Size :{" "}
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="weight"
-                  name="weight"
-                  placeholder="Weight"
+                  id="size"
+                  name="size"
+                  placeholder="size"
                   onChange={handleInputChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="habitat" className="my-2 fw-bold">
-                  Habitat :{" "}
+                <label htmlFor="description" className="my-2 fw-bold">
+                  Description :{" "}
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="habitat"
-                  name="habitat"
-                  placeholder="Habitat"
+                  id="description"
+                  name="description"
+                  placeholder="description"
                   onChange={handleInputChange}
                 />
               </div>
