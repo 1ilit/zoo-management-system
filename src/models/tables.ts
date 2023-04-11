@@ -18,7 +18,7 @@ export interface Animal {
     aid: string;
     name: string;
     specie: string;
-    date_of_birth: string;
+    date_of_birth: Date;
     weight: number;
     habitat: string;
 }
@@ -52,7 +52,7 @@ export interface TicketData {
     guide_last_name: string;
 }
 
-export interface Event {
+export interface Event{
     name: string;
     date: string;
     location: string;

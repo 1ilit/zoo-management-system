@@ -41,6 +41,7 @@ export default function AddTicket() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     handleInsert();
+    navigate("/tickets");
   };
 
   return (

@@ -8,7 +8,7 @@ export default function EditAnimal() {
   const { id } = useParams();
   const [animal, setAnimal] = useState<Animal>({
     aid: "",
-    date_of_birth: "",
+    date_of_birth: new Date("1990-07-15"),
     name: "",
     weight: 0,
     specie: "",
@@ -19,7 +19,11 @@ export default function EditAnimal() {
   const navigate = useNavigate();
   const query = `get-animal#select * from animal where animal.aid='${id}'`;
   const updateQuery = `update-animal#update animal
-  set aid='${formState.aid}', date_of_birth='${formState.date_of_birth}', name = '${formState.name}', specie='${formState.specie}', habitat='${formState.habitat}', weight=${formState.weight}
+  set aid='${formState.aid}', date_of_birth='${new Date(formState.date_of_birth)
+    .toISOString()
+    .slice(0, 10)}', name = '${formState.name}', specie='${
+    formState.specie
+  }', habitat='${formState.habitat}', weight=${formState.weight}
   where aid='${id}';`;
 
   const handleSelect = () => {
@@ -42,9 +46,7 @@ export default function EditAnimal() {
     });
   };
 
-  useEffect(() => {
-    handleSelect();
-  }, []);
+  useEffect(() => handleSelect, []);
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -59,6 +61,7 @@ export default function EditAnimal() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     handleUpdate();
+    navigate("/animals");
   };
 
   return (

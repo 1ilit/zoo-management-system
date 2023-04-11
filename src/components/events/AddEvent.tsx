@@ -19,10 +19,6 @@ export default function AddEvent() {
   `;
 
   const handleInsert = () => {
-    console.log(formState.name);
-    console.log(formState.date);
-    console.log(formState.location);
-    console.log(formState.event_manager_ssn);
     ipcRenderer.send("query", addQuery);
     ipcRenderer.on("query-add-event", (event, results) => {
       return () => {
@@ -44,6 +40,7 @@ export default function AddEvent() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     handleInsert();
+    navigate("/events");
   };
 
   return (

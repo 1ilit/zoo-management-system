@@ -26,9 +26,9 @@ export default function EditStaffMember() {
   const navigate = useNavigate();
   const query = `get-staff-member#select * from staff_member where staff_member.ssn='${id}'`;
   const updateQuery = `update-staff-member#update staff_member
-  set ssn='${formState.ssn}', date_of_birth='${
-    formState.date_of_birth.toISOString().split("T")[0]
-  }', first_name = '${formState.first_name}', last_name = '${
+  set ssn='${formState.ssn}', date_of_birth='${new Date(formState.date_of_birth)
+    .toISOString()
+    .slice(0, 10)}', first_name = '${formState.first_name}', last_name = '${
     formState.last_name
   }', sex='${formState.sex}', phone_number='${
     formState.phone_number
@@ -38,8 +38,8 @@ export default function EditStaffMember() {
     formState.isparttime
   }',isparttime='${formState.isfulltime}', payperhour=${parseFloat(
     formState.payperhour
-  )}, paypermonth=${parseFloat(formState.paypermonth)}'
-  where ssn='${id};`;
+  )}, paypermonth=${parseFloat(formState.paypermonth)}
+  where ssn='${id}';`;
 
   const handleSelect = () => {
     ipcRenderer.send("query", query);
@@ -77,8 +77,8 @@ export default function EditStaffMember() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(formState);
     handleUpdate();
+    navigate("/staff");
   };
 
   return (

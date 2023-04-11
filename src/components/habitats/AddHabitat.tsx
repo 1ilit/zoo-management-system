@@ -41,6 +41,7 @@ export default function AddHabitat() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     handleInsert();
+    navigate("/habitats");
   };
 
   return (

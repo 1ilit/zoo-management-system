@@ -7,7 +7,7 @@ import { Animal } from "@/models/tables";
 export default function AddAnimal() {
   const [formState, setFormState] = useState<Animal>({
     aid: "",
-    date_of_birth: "",
+    date_of_birth: new Date("1990-07-15"),
     name: "",
     weight: 0,
     specie: "",
@@ -41,6 +41,7 @@ export default function AddAnimal() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     handleInsert();
+    navigate("/animals");
   };
 
   return (
