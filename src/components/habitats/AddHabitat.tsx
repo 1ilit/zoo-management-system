@@ -12,6 +12,7 @@ export default function AddHabitat() {
     capacity: 0,
     description: "",
     size: 0,
+    animal_count: 0,
   });
 
   const navigate = useNavigate();

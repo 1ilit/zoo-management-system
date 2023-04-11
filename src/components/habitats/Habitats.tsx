@@ -6,7 +6,17 @@ import { Habitat } from "@/models/tables";
 
 export default function Habitats() {
   const [habitats, setHabitats] = useState<Habitat[]>([]);
-  const selectAllQuery = "habitat#select * from habitat;";
+  const selectAllQuery = `habitat#SELECT
+                                    h.hid,
+                                    h.name AS name,
+                                    h.capacity,
+                                    h.type,
+                                    h.size,
+                                    h.description,
+                                    COUNT(a.aid) AS animal_count
+                                  FROM habitat AS h
+                                  LEFT JOIN animal AS a ON h.hid = a.habitat
+                                  GROUP BY h.hid;`;
 
   const deleteBy = (table: string, field: string, value: string) => {
     return `delete from ${table} where ${table}.${field}='${value}';`;
@@ -56,6 +66,7 @@ export default function Habitats() {
                   <th>Type</th>
                   <th>Size</th>
                   <th>Description</th>
+                  <th>Number of animals</th>
                   <th colSpan={1}>Manage</th>
                 </tr>
               </thead>
@@ -68,6 +79,7 @@ export default function Habitats() {
                     <td>{s.type}</td>
                     <td>{s.size}</td>
                     <td>{s.description}</td>
+                    <td>{s.animal_count}</td>
                     <td>
                       <button onClick={() => handleDelete(s.hid)}>
                         <i className="fa-solid fa-trash"></i>

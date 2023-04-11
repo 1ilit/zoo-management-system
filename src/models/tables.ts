@@ -30,6 +30,7 @@ export interface Habitat {
     type: string;
     size: number;
     description: string;
+    animal_count?: number;
 }
 
 export interface Ticket {
