@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import Staff from "./components/staff_member/Staff";
-import Enter from "./components/Enter";
 import StaffInfo from "./components/staff_member/StaffInfo";
 import Dashboard from "./components/dashboard/Dashboard";
 import Animals from "./components/animal/Animals";
@@ -26,22 +25,21 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Enter />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/animals" element={<Animals />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/habitats" element={<Habitats />} />
+        <Route path="/animal/add" element={<AddAnimal />} />
+        <Route path="/animal/edit/:id" element={<EditAnimal />} />
         <Route path="/staff" element={<Staff />} />
-        <Route path="/tickets" element={<Tickets />} />
         <Route path="/staff/:id" element={<StaffInfo />} />
         <Route path="/staff/edit/:id" element={<EditStaffMember />} />
         <Route path="/staff/add" element={<AddStaffMember />} />
-        <Route path="/animal/edit/:id" element={<EditAnimal />} />
-        <Route path="/animal/add" element={<AddAnimal />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/event/add" element={<AddEvent />} />
+        <Route path="/habitats" element={<Habitats />} />
         <Route path="/habitat/add" element={<AddHabitat />} />
+        <Route path="/tickets" element={<Tickets />} />
         <Route path="/ticket/add" element={<AddTicket />} />
         <Route path="/ticket/:id" element={<TicketInfo />} />
-        <Route path="/event/add" element={<AddEvent />} />
       </Routes>
     </Router>
   );
