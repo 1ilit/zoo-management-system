@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain, IpcMainEvent } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, IpcMainEvent, dialog } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
 import { update } from './update'
@@ -73,7 +73,7 @@ app.whenReady().then(() => {
     connection.connect();
 
     connection.query(querySplit[1], function (error, results, fields) {
-      if (error) throw error;
+      if (error) dialog.showErrorBox('Error', `An error occurred: ${error.message}`);
       console.log(`Connected to the database from channel ${querySplit[0]}`);
       event.sender.send(`query-${querySplit[0]}`, results);
     });
