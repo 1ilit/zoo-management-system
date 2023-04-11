@@ -23,11 +23,31 @@ export interface Animal {
     habitat: string;
 }
 
-export interface Habitat{
+export interface Habitat {
     hid: string;
     name: string;
     capacity: number;
     type: string;
     size: number;
     description: string;
+}
+
+export interface Ticket {
+    tid: string;
+    price: number;
+    type: "VIP" | "Regular" | "Membership";
+    date_of_issuing: string;
+    recep_ssn: string;
+    guide_ssn: string;
+}
+
+export interface TicketData {
+    tid: string;
+    date_of_issuing: string;
+    type: string;
+    price: number;
+    recep_first_name: string;
+    recep_last_name: string;
+    guide_first_name: string;
+    guide_last_name: string;
 }
