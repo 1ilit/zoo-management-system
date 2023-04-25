@@ -62,13 +62,7 @@ export default function TicketInfo() {
                   </p>
                   <p>
                     <span className="fw-bold">Issued on :</span>{" "}
-                    {new Date(ticket!.date_of_issuing).toLocaleString("en-US", {
-                      month: "long",
-                      day: "2-digit",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
+                    {ticket?.date_of_issuing.toString()}
                   </p>
                   <p>
                     <span className="fw-bold">Issued by :</span>{" "}

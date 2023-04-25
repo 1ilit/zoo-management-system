@@ -34,8 +34,8 @@ export default function Events() {
       })
       .slice(0, 10)
       .replace(/\//g, "-");
-    const [day, month, year] = dateStr.split("-");
-    const formattedDateStr = `${year}-${day}-${month}`;
+    const [month, day, year] = dateStr.split("-");
+    const formattedDateStr = `${year}-${month}-${day}`;
 
     ipcRenderer.send(
       "query",

@@ -16,8 +16,19 @@ export default function AddTicket() {
 
   const navigate = useNavigate();
 
+  const dateStr = new Date()
+    .toLocaleString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .slice(0, 10)
+    .replace(/\//g, "-");
+  const [month, day, year] = dateStr.split("-");
+  const formattedDateStr = `${year}-${month}-${day}`;
+
   const addQuery = `add-ticket#insert into ticket (tid, type, date_of_issuing, recep_ssn, guide_ssn, price)
-  values ('${formState.tid}', '${formState.type}', '${formState.date_of_issuing}', '${formState.recep_ssn}', '${formState.guide_ssn}', ${formState.price});`;
+  values ('${formState.tid}', '${formState.type}', '${formattedDateStr}', '${formState.recep_ssn}', '${formState.guide_ssn}', ${formState.price});`;
 
   const handleInsert = () => {
     ipcRenderer.send("query", addQuery);
@@ -100,19 +111,6 @@ export default function AddTicket() {
                   id="price"
                   name="price"
                   placeholder="Price"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="doi" className="my-2 fw-bold">
-                  Date of issuing :{" "}
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="doi"
-                  name="date_of_issuing"
-                  placeholder="Date of issuing"
                   onChange={handleInputChange}
                 />
               </div>
