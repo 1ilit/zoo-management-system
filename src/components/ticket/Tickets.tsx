@@ -74,7 +74,13 @@ JOIN staff_member AS sm_guide ON t.guide_ssn = sm_guide.ssn;`;
                   <tr className="table-bordered align-middle" key={index}>
                     <td scope="row">{s.tid}</td>
                     <td>{s.type}</td>
-                    <td>{s.date_of_issuing.toString()}</td>
+                    <td>
+                      {new Date(s.date_of_issuing).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "2-digit",
+                        year: "numeric",
+                      })}
+                    </td>
                     <td>{`${s.recep_first_name} ${s.recep_last_name}`}</td>
                     <td>{`${s.guide_first_name} ${s.guide_last_name}`}</td>
                     <td>

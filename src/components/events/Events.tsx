@@ -26,13 +26,20 @@ export default function Events() {
   };
 
   const handleDelete = (event_name: string, location: string, date: string) => {
+    const dateStr = new Date(date)
+      .toLocaleString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .slice(0, 10)
+      .replace(/\//g, "-");
+    const [day, month, year] = dateStr.split("-");
+    const formattedDateStr = `${year}-${day}-${month}`;
+
     ipcRenderer.send(
       "query",
-      `event-delete#DELETE FROM event WHERE name='${event_name}' and date='${new Date(
-        date
-      )
-        .toISOString()
-        .slice(0, 10)}' and location='${location}';`
+      `event-delete#DELETE FROM event WHERE name='${event_name}' and date='${formattedDateStr}' and location='${location}';`
     );
     ipcRenderer.on("query-event-delete", (event, results) => {
       return () => {
@@ -71,7 +78,13 @@ export default function Events() {
                 {events.map((s: EventData, index: number) => (
                   <tr className="table-bordered align-middle" key={index}>
                     <td scope="row">{s.event_name}</td>
-                    <td>{s.event_date.toString()}</td>
+                    <td>
+                      {new Date(s.event_date).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "2-digit",
+                        year: "numeric",
+                      })}
+                    </td>
                     <td>{s.location}</td>
                     <td>{`${s.event_mgr_first_name} ${s.event_mgr_last_name}`}</td>
                     <td>

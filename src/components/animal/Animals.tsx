@@ -65,12 +65,16 @@ export default function Animals() {
                     <td>{s.name}</td>
                     <td>{s.specie}</td>
                     <td>{s.weight}</td>
-                    <td>{s.date_of_birth.toString()}</td>
+                    <td>
+                      {s.date_of_birth.toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "2-digit",
+                        year: "numeric",
+                      })}
+                    </td>
                     <td>{s.habitat}</td>
                     <td>
-                      <Link to={`/animal/edit/${s.aid}`}>
-                        Edit
-                      </Link>
+                      <Link to={`/animal/edit/${s.aid}`}>Edit</Link>
                     </td>
                     <td>
                       <button onClick={() => handleDelete(s.aid)}>
