@@ -41,6 +41,7 @@ export default function AddEvent() {
     event.preventDefault();
     handleInsert();
     navigate("/events");
+    navigate(0);
   };
 
   return (

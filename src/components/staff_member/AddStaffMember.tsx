@@ -58,7 +58,8 @@ export default function AddStaffMember() {
     event.preventDefault();
     console.log(formState);
     handleInsert();
-    navigate(-1);
+    navigate("/staff");
+    navigate(0);
   };
 
   return (

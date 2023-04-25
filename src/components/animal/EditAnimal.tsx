@@ -62,6 +62,7 @@ export default function EditAnimal() {
     event.preventDefault();
     handleUpdate();
     navigate("/animals");
+    navigate(0);
   };
 
   return (

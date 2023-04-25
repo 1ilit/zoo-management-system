@@ -79,6 +79,7 @@ export default function EditStaffMember() {
     event.preventDefault();
     handleUpdate();
     navigate("/staff");
+    navigate(0);
   };
 
   return (

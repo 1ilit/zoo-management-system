@@ -42,6 +42,7 @@ export default function AddTicket() {
     event.preventDefault();
     handleInsert();
     navigate("/tickets");
+    navigate(0);
   };
 
   return (

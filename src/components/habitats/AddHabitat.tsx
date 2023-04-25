@@ -43,6 +43,7 @@ export default function AddHabitat() {
     event.preventDefault();
     handleInsert();
     navigate("/habitats");
+    navigate(0);
   };
 
   return (

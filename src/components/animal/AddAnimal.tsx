@@ -42,6 +42,7 @@ export default function AddAnimal() {
     event.preventDefault();
     handleInsert();
     navigate("/animals");
+    navigate(0);
   };
 
   return (
