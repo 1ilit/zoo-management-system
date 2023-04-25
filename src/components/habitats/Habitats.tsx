@@ -33,7 +33,10 @@ export default function Habitats() {
   };
 
   const handleDelete = (id: string) => {
-    ipcRenderer.send("query", `habitat-delete#${deleteBy("habitat", "hid", id)}`);
+    ipcRenderer.send(
+      "query",
+      `habitat-delete#${deleteBy("habitat", "hid", id)}`
+    );
     ipcRenderer.on("query-habitat-delete", (event, results) => {
       return () => {
         ipcRenderer.removeAllListeners("query-habitat-delete");
@@ -66,8 +69,8 @@ export default function Habitats() {
                   <th>Type</th>
                   <th>Size</th>
                   <th>Description</th>
-                  <th>Number of animals</th>
-                  <th colSpan={1}>Manage</th>
+                  <th>Num of animals</th>
+                  <th colSpan={2}>Manage</th>
                 </tr>
               </thead>
               <tbody>
@@ -80,6 +83,9 @@ export default function Habitats() {
                     <td>{s.size}</td>
                     <td>{s.description}</td>
                     <td>{s.animal_count}</td>
+                    <td>
+                      <Link to={`/habitat/edit/${s.hid}`}>Edit</Link>
+                    </td>
                     <td>
                       <button onClick={() => handleDelete(s.hid)}>
                         <i className="fa-solid fa-trash"></i>
